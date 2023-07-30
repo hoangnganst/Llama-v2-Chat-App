@@ -16,7 +16,11 @@ All in a containerized maner.
 
 ## Results
 
+Chatbot:
 ![image](https://github.com/kevinknights29/Llama-v2-Chat-App/assets/74464814/65a006ce-3684-4c80-a0cd-83c22a71298c)
+
+API:
+![image](https://github.com/kevinknights29/Llama-v2-Chat-App/assets/74464814/79f45546-5b02-4db5-ad60-07cccd7496b2)
 
 ## Usage
 
@@ -31,6 +35,12 @@ docker compose build
 ```bash
 docker compose down && docker compose up -d
 ```
+
+### Have fun
+
+Visit: `http://localhost:7861/` to access the Gradio Chatbot UI.
+
+To learn more about the inference API, please visit: `http://localhost:5001/swagger`
 
 ## Contributing
 
