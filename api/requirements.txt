@@ -1,0 +1,5 @@
+flask
+flask-smorest
+llama-cpp-python
+python-dotenv
+PyYAML
