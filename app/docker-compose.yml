@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+    app-service:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+            - 7860:7860
+        environment:
+            TEXT_GENERATION_API: http://localhost:5001/inference/text-generation/stream

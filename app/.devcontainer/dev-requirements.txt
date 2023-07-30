@@ -1,0 +1,3 @@
+bandit # to leverage vscode bandit extension
+gradio
+requests
