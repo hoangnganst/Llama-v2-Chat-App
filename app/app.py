@@ -6,7 +6,10 @@ import gradio as gr
 import requests
 
 
-TEXT_GENERATION_API = os.environ.get("TEXT_GENERATION_API")
+TEXT_GENERATION_API = os.environ.get(
+    "TEXT_GENERATION_API",
+    "http://api-service:5000/inference/text-generation/stream",
+)
 METAPROMPT = (
     "<s>[INST] <<SYS>>"
     "You are a helpful bot. Answer the user's questions. Respect the user. "
@@ -42,7 +45,10 @@ def _api_call(prompt):
 
 def predict(msg, hist):
     prompt = _build_prompt(msg, hist)
-    _api_call(prompt)
+    text = ""
+    for line in _api_call(prompt):
+        text += line
+        yield text
 
 
 if __name__ == "__main__":
