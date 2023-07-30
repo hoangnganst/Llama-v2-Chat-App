@@ -1,0 +1,5 @@
+model:
+  dir: "/opt/api/models"
+  max_tokens: 256
+  stop: ["Q:", "\n"]
+  echo: True
