@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+    api-service:
+        build:
+          context: ./api  # Path to Dockerfile of api-service
+          dockerfile: Dockerfile
+        ports:
+            - 5001:5000
+        environment:
+            PORT: 5000
+            FLASK_APP: api.py
+        networks:
+            - app-network
+
+    app-service:
+        build:
+          context: ./app  # Path to Dockerfile of app-service
+          dockerfile: Dockerfile
+        ports:
+            - 7861:7860
+        environment:
+            TEXT_GENERATION_API: http://api-service:5000/inference/text-generation/stream
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
