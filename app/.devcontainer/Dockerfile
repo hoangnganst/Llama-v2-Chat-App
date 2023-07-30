@@ -1,10 +1,19 @@
-FROM python:3.11
+FROM python:3.11.4-slim-bullseye
+
+ENV LANG=C.UTF-8
+
+# Set working directory
+WORKDIR /opt/app
+
+# Install packages
+RUN apt update && \
+    apt install -y --no-install-recommends \
+    wget \
+    git
 
 # Copy files
-RUN mkdir -p /opt/app/
-COPY requirements.txt /opt/app/
-COPY install_dependencies.sh /opt/app/
+COPY install_dependencies.sh .
+COPY dev-requirements.txt .
 
 # Install dependencies
-RUN cd /opt/app/ && \
-    bash ./install_dependencies.sh ./requirements.txt
+RUN bash ./install_dependencies.sh ./dev-requirements.txt
