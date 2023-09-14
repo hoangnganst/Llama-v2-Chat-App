@@ -8,7 +8,7 @@ import requests
 
 TEXT_GENERATION_API = os.environ.get(
     "TEXT_GENERATION_API",
-    "http://api-service:5000/inference/text-generation/stream",
+    "http://localhost:5001/inference/text-generation/stream",
 )
 METAPROMPT = (
     "<s>[INST] <<SYS>>"
@@ -37,7 +37,7 @@ def _api_call(prompt):
         "prompt": prompt,
     }
     response = requests.post(TEXT_GENERATION_API, json=data, stream=True, timeout=60)
-
+    print(prompt)
     for line in response.iter_lines():
         if line:
             yield line.decode("utf-8")
@@ -52,7 +52,7 @@ def predict(msg, hist):
 
 
 if __name__ == "__main__":
-    gr.ChatInterface(predict, title="Chat with Llama-v2 7b").queue().launch(
+    gr.ChatInterface(predict, title="Chat with Llama-v2").queue().launch(
         server_name="0.0.0.0",
         server_port=7860,
     )

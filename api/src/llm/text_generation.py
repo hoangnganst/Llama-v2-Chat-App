@@ -9,10 +9,13 @@ LLM = None
 
 
 def _find_model(model_dir=utils.config()["model"]["dir"], pattern="*.bin"):
+    print({model_dir})
     model_path = Path(model_dir)
-    model_file_path = list(model_path.glob(pattern))[0]
+    print(str(model_path.glob(pattern)))
 
-    return str(model_file_path.resolve())
+    # model_file_path = list(model_path.glob(pattern))[0]
+
+    return str()
 
 
 def _get_generation_params(params=utils.config()["model"]):
@@ -33,16 +36,31 @@ def _format_prompt(prompt):
 
 
 def text_generation(prompt):
-    global LLM
+    LMM = None
+    LLM = Llama(
+        model_path="models/llama-2-7b.Q8_0.gguf",
+        n_gqa=8,
+        n_threads=2)
+    print("LLLLLL" + LLM)
+
     if LLM is None:
-        LLM = Llama(_find_model())
+        LLM = Llama(
+        model_path="models/llama-2-7b.Q8_0.gguf",
+        n_gqa=8,
+        n_threads=2)
 
     return LLM(_format_prompt(prompt), **_get_generation_params())
 
 
 def text_generation_stream(prompt):
     global LLM
+    print("LLM")
+    print(LLM)
+
     if LLM is None:
-        LLM = Llama(_find_model())
+        LLM = Llama(
+        model_path="models/llama-2-7b.Q8_0.gguf",
+        n_gqa=8,
+        n_threads=2)
 
     return LLM(_format_prompt(prompt), stream=True, **_get_generation_params())
